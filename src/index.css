@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+	font-family: Inter, sans-serif;
+}
+
+select {
+	background-color: aliceblue;
+	padding: 10px 10px;
+	border-radius: 5px;
+}
