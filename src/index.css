@@ -6,12 +6,26 @@
   box-sizing: border-box;
 }
 
-body {
+main {
 	font-family: Inter, sans-serif;
+	background-image: url('/bg-top-right-blob.svg'), url('/bg-bottom-right-blob.svg');
+	background-repeat: no-repeat, no-repeat;
+	background-position: top right, bottom left;
+	background-size: 25%, 25%;
 }
 
 select {
 	background-color: aliceblue;
 	padding: 10px 10px;
 	border-radius: 5px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label {
+	background-color: #d6dbf5;
 }
