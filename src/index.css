@@ -11,7 +11,7 @@ main {
 	background-image: url('/bg-top-right-blob.svg'), url('/bg-bottom-right-blob.svg');
 	background-repeat: no-repeat, no-repeat;
 	background-position: top right, bottom left;
-	background-size: 25%, 25%;
+	background-size: 20%, 20%;
 }
 
 select {
