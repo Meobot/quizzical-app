@@ -6,7 +6,7 @@ function Quiz(props) {
 	console.log("🚀 ~ file: Quiz.tsx:6 ~ Quiz ~ correctAnswers:", correctAnswers)
 
 	return (
-		<div className="flex flex-col container p-8">
+		<form className="flex flex-col container p-8">
 			{props.quizData.map((question) => (
 				<div
 					key={question.question}
@@ -21,22 +21,22 @@ function Quiz(props) {
 							question.correct_answer,
 						]
 							.sort(() => Math.random() - 0.5)
-							.map((choice) => (
+							.map((answer) => (
 								<div 
-								key={choice}
+								key={answer}
 								className="my-6"
 								>
 									<input
 										type={props.type === "multiple" ? "checkbox" : "radio"}
-										id={choice}
+										id={answer}
 										name={question.question}
-										value={choice}
+										value={answer}
 									/>
 									<label
-										htmlFor={choice}
+										htmlFor={answer}
 										className="border-solid border-2 border-btnBorColor rounded-2xl min-w-1/2 py-2 px-5"
 									>
-										{choice}
+										{answer}
 									</label>
 								</div>
 							))}
@@ -48,7 +48,7 @@ function Quiz(props) {
 					Check answers
 				</button>
 			</div>
-		</div>
+		</form>
 	);
 }
 
