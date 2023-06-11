@@ -27,7 +27,7 @@ function Quiz(props) {
 								className="my-6"
 								>
 									<input
-										type={props.type === "multiple" ? "checkbox" : "radio"}
+										type="radio"
 										id={answer}
 										name={question.question}
 										value={answer}
