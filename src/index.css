@@ -20,12 +20,6 @@ select {
 	border-radius: 5px;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+input[type="radio"] {
 	display: none;
-}
-
-input[type="radio"]:checked + label,
-input[type="checkbox"]:checked + label {
-	background-color: #d6dbf5;
 }
