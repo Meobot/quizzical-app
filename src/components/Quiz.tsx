@@ -7,10 +7,12 @@ function Quiz(props) {
 	const [score, setScore] = useState(0);
 	const [gameEnd, setGameEnd] = useState(false);
 
+	// Shuffle the answers when the component mounts
 	useEffect(() => {
 		shuffleAnswers();
 	}, []);
 
+	// Shuffle the answers so they're not always in the same order
 	const shuffleAnswers = () => {
 		const shuffled = props.quizData.map((question) => {
 			const answers = [
@@ -26,6 +28,7 @@ function Quiz(props) {
 		setShuffledAnswers(shuffled);
 	};
 
+	// Update the selected answers object when the user selects an answer
 	const handleAnswerSelect = (question, answer) => {
 		setSelectedAnswers((prevAnswers) => ({
 			...prevAnswers,
@@ -33,6 +36,7 @@ function Quiz(props) {
 		}));
 	};
 
+	// Check the answers and calculate the final score
 	const checkAnswers = (e) => {
 		e.preventDefault();
 		const { quizData } = props;
