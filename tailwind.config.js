@@ -10,7 +10,8 @@ export default {
 			colors: {
 				backgroundColor: "#F5F7FB",
 				btnBorColor: "#4D5B9E",
-				quizBorderColor: "#DBDEF0"
+				quizBorderColor: "#DBDEF0",
+				selectedAnswer: "#d6dbf5"
 			},
 		},
 	},
