@@ -10,6 +10,7 @@ function Quiz(props) {
 	// Shuffle the answers when the component mounts
 	useEffect(() => {
 		shuffleAnswers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Shuffle the answers so they're not always in the same order
@@ -68,6 +69,12 @@ function Quiz(props) {
 					<div className="flex flex-wrap space-x-6">
 						{question.answers.map((answer) => {
 							const inputId = nanoid();
+							const isCorrectAnswer =
+								answer === question.correct_answer;
+							const isSelectedAnswer =
+								selectedAnswers[question.question] === answer;
+							const isIncorrectUserAnswer =
+								isSelectedAnswer && !isCorrectAnswer;
 
 							return (
 								<div key={answer} className="my-6">
@@ -82,15 +89,18 @@ function Quiz(props) {
 												answer
 											)
 										}
-										checked={
-											selectedAnswers[
-												question.question
-											] === answer
-										}
+										checked={isSelectedAnswer}
 									/>
 									<label
 										htmlFor={inputId}
-										className="border-solid border-2 border-btnBorColor rounded-2xl min-w-1/2 py-2 px-5"
+										className={`border-solid border-2 border-btnBorColor rounded-2xl min-w-1/2 py-2 px-5 ${
+											gameEnd && isCorrectAnswer
+												? "bg-green-500 text-white"
+												: gameEnd &&
+												  isIncorrectUserAnswer
+												? "bg-red-500 text-white"
+												: gameEnd === false && isSelectedAnswer ? "bg-selectedAnswer text-white" : ""
+										}`}
 									>
 										{answer}
 									</label>
@@ -102,9 +112,9 @@ function Quiz(props) {
 			))}
 			<div className="flex justify-center items-center  space-x-14">
 				{gameEnd && (
-						<h3 className="font-bold">
-							You scored {score}/5 correct answers
-						</h3>
+					<h3 className="font-bold">
+						You scored {score}/5 correct answers
+					</h3>
 				)}
 				<button
 					className="bg-btnBorColor text-white rounded-2xl px-7 py-4"
