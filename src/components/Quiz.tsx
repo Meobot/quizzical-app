@@ -124,13 +124,13 @@ function Quiz(props: QuizProps) {
 										htmlFor={inputId}
 										className={`border-solid border-2 border-btnBorColor rounded-2xl min-w-1/2 py-2 px-5 ${
 											gameEnd && isCorrectAnswer
-												? "bg-correctAnswer"
+												? "bg-correctAnswer border-none"
 												: gameEnd &&
 													isIncorrectUserAnswer
-												? "bg-incorrectAnswer"
+												? "bg-incorrectAnswer border-none"
 												: gameEnd === false &&
 													isSelectedAnswer
-												? "bg-selectedAnswer"
+												? "bg-selectedAnswer border-none"
 												: ""
 										}`}
 									>
