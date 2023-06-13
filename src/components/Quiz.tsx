@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
 function Quiz(props) {
@@ -97,9 +97,12 @@ function Quiz(props) {
 											gameEnd && isCorrectAnswer
 												? "bg-green-500 text-white"
 												: gameEnd &&
-												  isIncorrectUserAnswer
+													isIncorrectUserAnswer
 												? "bg-red-500 text-white"
-												: gameEnd === false && isSelectedAnswer ? "bg-selectedAnswer text-white" : ""
+												: gameEnd === false &&
+													isSelectedAnswer
+												? "bg-selectedAnswer text-white"
+												: ""
 										}`}
 									>
 										{answer}
