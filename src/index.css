@@ -12,6 +12,7 @@ main {
 	background-repeat: no-repeat, no-repeat;
 	background-position: top right, bottom left;
 	background-size: 20%, 20%;
+	color: #293264;
 }
 
 select {
