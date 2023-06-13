@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
+import Question from "./Question";
 
 interface QuizData {
 	question: string;
@@ -114,35 +115,20 @@ function Quiz({ quizData, handleRestart }: QuizProps) {
 
 							return (
 								<div key={answer} className="my-6">
-									<input
-										type="radio"
-										id={inputId}
-										name={question.question}
-										value={answer}
-										onChange={() =>
-											handleAnswerSelect(
-												question.question,
-												answer
-											)
+									<Question
+										question={question}
+										handleAnswerSelect={
+											handleAnswerSelect
 										}
-										checked={isSelectedAnswer}
+										gameEnd={gameEnd}
+										isSelectedAnswer={isSelectedAnswer}
+										answer={answer}
+										isCorrectAnswer={isCorrectAnswer}
+										isIncorrectUserAnswer={
+											isIncorrectUserAnswer
+										}
+										inputId={inputId}
 									/>
-									<label
-										htmlFor={inputId}
-										className={`border-solid border-2 border-btnBorColor rounded-2xl min-w-1/2 py-2 px-5 ${
-											gameEnd && isCorrectAnswer
-												? "bg-correctAnswer border-none"
-												: gameEnd &&
-													isIncorrectUserAnswer
-												? "bg-incorrectAnswer border-none"
-												: gameEnd === false &&
-													isSelectedAnswer
-												? "bg-selectedAnswer border-none"
-												: ""
-										}`}
-									>
-										{answer}
-									</label>
 								</div>
 							);
 						})}
