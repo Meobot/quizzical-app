@@ -56,11 +56,19 @@ function App() {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
+	const handleRestart = () => {
+		setGameStart(false);
+		setQuizData([]);
+	};
+
 	return (
 		<main className="min-h-screen bg-backgroundColor flex items-center justify-center">
 			<div className="flex justify-center items-center">
 				{gameStart ? (
-					<Quiz quizData={quizData} />
+					<Quiz 
+					quizData={quizData} 
+					handleRestart={handleRestart}
+					/>
 				) : (
 					<Start
 						handleFormChange={handleFormChange}
