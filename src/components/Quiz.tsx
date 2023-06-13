@@ -7,7 +7,7 @@ interface QuizProps {
 		correct_answer: string;
 		incorrect_answers: string[];
 	}[];
-	playAgain: () => void;
+	handleRestart: () => void;
 }
 
 interface SelectedAnswers {
@@ -150,7 +150,7 @@ function Quiz(props: QuizProps) {
 				)}
 				<button
 					className="bg-btnBorColor text-white rounded-2xl px-7 py-4"
-					onClick={gameEnd ? props.playAgain : checkAnswers}
+					onClick={gameEnd ? props.handleRestart : checkAnswers}
 				>
 					{gameEnd ? "Play again" : "Check answers"}
 				</button>
