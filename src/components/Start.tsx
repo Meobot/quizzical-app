@@ -1,9 +1,8 @@
-import React from "react";
 import { categoryOptions } from "../data/categoryOptions.ts";
 
 function Start(props) {
 
-	const handleBtnClick = (e) => {
+	const handleBtnClick = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
 		props.setGameStart(true);
 	};
