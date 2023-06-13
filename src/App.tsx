@@ -41,7 +41,7 @@ function App() {
 	}
 
 	// Update the form data when the user selects a new option
-	function handleFormChange(e) {
+	const handleFormChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	}
 
