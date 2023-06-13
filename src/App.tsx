@@ -87,7 +87,12 @@ function App() {
 				{isLoading ? (
 					<Loading />
 				) : gameStart ? (
-					<Quiz quizData={quizData} />
+					<Quiz
+						quizData={quizData}
+						handleRestart={function (): void {
+							handleRestart();
+						}}
+					/>
 				) : (
 					<Start
 						handleFormChange={handleFormChange}

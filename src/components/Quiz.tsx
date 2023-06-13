@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
-interface QuizProps {
-	quizData: {
-		question: string;
-		correct_answer: string;
-		incorrect_answers: string[];
-	}[];
+interface QuizData {
+	question: string;
+	correct_answer: string;
+	incorrect_answers: string[];
+  }
+  
+  interface QuizProps {
+	quizData: QuizData[];
 	handleRestart: () => void;
-}
+  }
 
 interface SelectedAnswers {
 	[question: string]: string;
 }
 
-function Quiz(props: QuizProps) {
+function Quiz({ quizData, handleRestart }: QuizProps) {
 	const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswers>({});
 	const [shuffledAnswers, setShuffledAnswers] = useState<
 		{
@@ -35,7 +37,7 @@ function Quiz(props: QuizProps) {
 
 	// Shuffle the answers so they're not always in the same order
 	const shuffleAnswers = () => {
-		const shuffled = props.quizData.map((question) => {
+		const shuffled = quizData.map((question) => {
 			const answers = [
 				...question.incorrect_answers,
 				question.correct_answer,
@@ -58,11 +60,6 @@ function Quiz(props: QuizProps) {
 	// Check the answers and calculate the final score
 	const checkAnswers = (e: React.FormEvent) => {
 		e.preventDefault();
-		const { quizData } = props;
-		const correctAnswers = quizData.map(
-			(question) => question.correct_answer
-		);
-		let userScore = 0;
 
 		const unansweredQuestions = quizData.filter(
 			(question) => !selectedAnswers[question.question]
@@ -75,15 +72,25 @@ function Quiz(props: QuizProps) {
 			return;
 		}
 
-		for (let i = 0; i < quizData.length; i++) {
-			if (selectedAnswers[quizData[i].question] === correctAnswers[i]) {
-				userScore++;
-			}
-		}
-
-		setScore(userScore);
+		calculateScore();
 		setGameEnd(true);
 	};
+
+	// Calculate the final score
+	const calculateScore = () => {
+		const correctAnswers = quizData.map(
+			(question) => question.correct_answer
+			);
+			let userScore = 0;
+
+			for (let i = 0; i < quizData.length; i++) {
+				if (selectedAnswers[quizData[i].question] === correctAnswers[i]) {
+					userScore++;
+				}
+			}
+			
+			setScore(userScore);
+		};
 
 	return (
 		<form className="flex flex-col container p-8">
@@ -150,7 +157,7 @@ function Quiz(props: QuizProps) {
 				)}
 				<button
 					className="bg-btnBorColor text-white rounded-2xl px-7 py-4"
-					onClick={gameEnd ? props.handleRestart : checkAnswers}
+					onClick={gameEnd ? handleRestart : checkAnswers}
 				>
 					{gameEnd ? "Play again" : "Check answers"}
 				</button>
