@@ -2,6 +2,7 @@ import { useState } from "react";
 import { decode } from "html-entities";
 import Start from "./components/Start";
 import Quiz from "./components/Quiz";
+import Loading from "./components/Loading";
 
 interface FormData {
 	numOfQuestions: string;
@@ -25,29 +26,42 @@ function App() {
 		type: "",
 	});
 	const [quizData, setQuizData] = useState<QuizQuestion[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	// Fetch quiz data from the API
 	async function getQuizData(formData: FormData) {
-		const url = `https://opentdb.com/api.php?amount=${formData.numOfQuestions}&category=${formData.category}&difficulty=${formData.difficulty}&type=${formData.type}`;
+		setIsLoading(true);
 
-		const response = await fetch(url);
-		const data = await response.json();
+		try {
+			const url = `https://opentdb.com/api.php?amount=${formData.numOfQuestions}&category=${formData.category}&difficulty=${formData.difficulty}&type=${formData.type}`;
 
-		if (data) {
-			// Decode the HTML entities in the question and answer options
-			const decodedData = data.results.map((question: QuizQuestion) => {
-				question.question = decode(question.question);
-				question.correct_answer = decode(question.correct_answer);
-				question.incorrect_answers = question.incorrect_answers.map(
-					(answer: string) => decode(answer)
+			const response = await fetch(url);
+			const data = await response.json();
+
+			if (data) {
+				// Decode the HTML entities in the question and answer options
+				const decodedData = data.results.map(
+					(question: QuizQuestion) => {
+						question.question = decode(question.question);
+						question.correct_answer = decode(
+							question.correct_answer
+						);
+						question.incorrect_answers =
+							question.incorrect_answers.map((answer: string) =>
+								decode(answer)
+							);
+						return question;
+					}
 				);
-				return question;
-			});
 
-			setGameStart(true);
-			setQuizData(decodedData);
-		} else {
-			alert("There was an error fetching your quiz data. Please try again.");
+				setGameStart(true);
+				setQuizData(decodedData);
+				setIsLoading(false);
+			}
+		} catch (error) {
+			setIsLoading(false);
+			alert(Error("There was an error fetching the quiz data"));
+			handleRestart();
 		}
 	}
 
@@ -58,17 +72,22 @@ function App() {
 
 	const handleRestart = () => {
 		setGameStart(false);
+		setFormData({
+			numOfQuestions: "5",
+			category: "",
+			difficulty: "",
+			type: "",
+		});
 		setQuizData([]);
 	};
 
 	return (
 		<main className="min-h-screen bg-backgroundColor flex items-center justify-center">
 			<div className="flex justify-center items-center">
-				{gameStart ? (
-					<Quiz 
-					quizData={quizData} 
-					handleRestart={handleRestart}
-					/>
+				{isLoading ? (
+					<Loading />
+				) : gameStart ? (
+					<Quiz quizData={quizData} />
 				) : (
 					<Start
 						handleFormChange={handleFormChange}
