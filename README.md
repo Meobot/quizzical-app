@@ -2,6 +2,9 @@
 
 This quiz app is a solo project developed as part of Scrimba's web development curriculum. It allows users to take quizzes consisting of multiple-choice or true/false questions. The app is built using React and Tailwind CSS.
 
+## Site
+https://coruscating-chaja-901cfc.netlify.app/
+
 ## Features
 
 - User can choose a specific category and difficulty level for the quiz.
