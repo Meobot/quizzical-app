@@ -5,7 +5,9 @@ function Loading() {
   return (
     <div className="flex justify-center items-center">
       <FontAwesomeIcon icon={faSpinner} spin size="3x" />
-      <span className="ml-2">Loading...</span>
+      <span className="ml-2" role="status" aria-live="polite">
+        Loading...
+      </span>
     </div>
   );
 }

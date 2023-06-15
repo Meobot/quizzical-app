@@ -83,7 +83,7 @@ function App() {
 
 	return (
 		<main className="min-h-screen bg-backgroundColor flex items-center justify-center">
-			<div className="flex justify-center items-center">
+			<section className="flex justify-center items-center">
 				{isLoading ? (
 					<Loading />
 				) : gameStart ? (
@@ -99,7 +99,7 @@ function App() {
 						setGameStart={() => getQuizData(formData)}
 					/>
 				)}
-			</div>
+			</section>
 		</main>
 	);
 }
